@@ -6,21 +6,19 @@ let PORT = 4000 || PORT;
 let latestReport = "";
 
 app.use('/', (req, res, error) => {
-  res.json(latestReport);
-})
-
-
-axios.get("https://status.dexcom.com/")
+  axios.get("https://status.dexcom.com/")
   .then((response) => {
     const $ = cheerio.load(response.data);
     const report = $('.status-day');
     latestReport = {
       reported: $(report[0]).find('p').text()
     };
+    res.json(latestReport);
   })
   .catch((error) => {
     console.log(error)
   })
+})
 
 
 
