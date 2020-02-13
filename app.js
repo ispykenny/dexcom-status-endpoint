@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const axios = require('axios');
 const cheerio = require('cheerio')
-let PORT = 4000 || PORT;
+let PORT = process.env.PORT || 4000;
 let latestReport = "";
 
 app.use('/', (req, res, error) => {
