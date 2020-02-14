@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const axios = require('axios');
-const cheerio = require('cheerio')
+const cheerio = require('cheerio');
+const moment = require('moment');
 let PORT = process.env.PORT || 4000;
 let latestReport = "";
 
@@ -19,6 +20,7 @@ app.use('/', (req, res, error) => {
     const report = $('.status-day');
     latestReport = {
       reported: $(report[0]).find('p').text(),
+      postedTime: moment().format('MMMM Do YYYY, h:mm:ss a'),
       date: $(report[0]).find('.date').text()
     };
     res.json(latestReport);
