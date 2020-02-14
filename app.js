@@ -20,7 +20,7 @@ app.use('/', (req, res, error) => {
     const report = $('.status-day');
     latestReport = {
       reported: $(report[0]).find('p').text(),
-      postedTime: moment().format('MMMM Do YYYY, h:mm:ss a'),
+      postedTime: moment().subtract(8 , 'hour').format('MMMM Do YYYY, h:mm:ss a'),
       date: $(report[0]).find('.date').text()
     };
     res.json(latestReport);
