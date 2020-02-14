@@ -21,11 +21,7 @@ app.use('/', (req, res, error) => {
       reported: $(report[0]).find('p').text(),
       date: $(report[0]).find('.date').text()
     };
-    res.send(
-      `<h1>Report: ${latestReport.reported}</h1>
-        <h3>Date: ${latestReport.date}</h3>
-      `
-    );
+    res.json(latestReport);
   })
   .catch((error) => {
     console.log(error)
