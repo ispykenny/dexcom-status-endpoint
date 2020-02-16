@@ -19,14 +19,6 @@ app.use('/', (req, res, error) => {
   .then((response) => {
     const $ = cheerio.load(response.data);
     const report = $('.component-inner-container');
-    let localUrl = 'http://localhost:4000/';
-    let checkUrl = url.parse(localUrl, true).hostname
-    let timeStamp = '';
-    if(checkUrl === "localhost") {
-      timeStamp =  moment().format('MMMM Do YYYY, h:mm:ss a');
-    } else {
-      timeStamp =  moment().subtract(8 , 'hour').format('MMMM Do YYYY, h:mm:ss a');
-    }
     let report_item = '';
     $(report).each(function() {
       let $reportType = $(this).find('.name').text().trim();
@@ -34,7 +26,7 @@ app.use('/', (req, res, error) => {
       report_item = {
         report_type: $reportType,
         report_status: $reportStatus,
-        time: timeStamp
+        time:  moment().subtract(8 , 'hour').format('MMMM Do YYYY, h:mm:ss a')
       }
       allReports.push(report_item)
     })
