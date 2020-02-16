@@ -5,7 +5,6 @@ const cheerio = require('cheerio');
 const moment = require('moment');
 const url = require('url');
 let PORT = process.env.PORT || 4000;
-let allReports = [];
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -15,6 +14,7 @@ app.use((req, res, next) => {
 
 
 app.use('/', (req, res, error) => {
+  let allReports = [];
   axios.get('https://status.dexcom.com/')
   .then((response) => {
     const $ = cheerio.load(response.data);
